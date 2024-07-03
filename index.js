@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const register = require('./routes/register');
+const logger = require('./config/logger')
 
 // create an app to handle API requests
 const app = express();
 app.use(express.json());
 
 // preparing listening ports
-app.listen(3000, ()=>{
-  console.log("Listening to port 3000.... ");
+app.listen(3000, () => {
+  logger.info("Server is on and listening to port 3000");
 });
 
 app.use('/api/register', register);
@@ -16,5 +17,5 @@ app.use('/api/register', register);
 
 
 mongoose.connect('mongodb://localhost:27017/blogdb')
-  .then(() => console.log('MongoDB connected successfully!'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => logger.info('MongoDB connected successfully!'))
+  .catch(err => logger.error('MongoDB connection error:', err));
