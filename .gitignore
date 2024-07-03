@@ -2,4 +2,5 @@
 .package-lock.json
 package-lock.json
 /logs/*
+!/logs/.log
 /config/default.json
