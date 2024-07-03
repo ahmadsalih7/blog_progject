@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const config = require('config');
+const {dblogger} = require('../config/logger');
 const { User, validate } = require('../models/user');
 
 
@@ -27,9 +28,11 @@ router.post('/', async (req, res) => {
     });
     try {
         res.send(await newUser.save());
+        dblogger.info('A new user was registered')
     }
     catch(err){
         res.status(404).send("User is already exists");
+        dblogger.error(err.message);
     }
 
 });

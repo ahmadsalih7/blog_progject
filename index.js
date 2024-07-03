@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const config = require('config');
 const register = require('./routes/register');
-const logger = require('./config/logger')
+const {logger} = require('./config/logger')
 
 // create an app to handle API requests
 const app = express();
