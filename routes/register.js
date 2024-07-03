@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const config = require('config');
 const { User, validate } = require('../models/user');
 
 
@@ -17,7 +18,7 @@ router.post('/', async (req, res) => {
 
     // else create a a new User model instance
     // During registration, hash the password before saving the user
-    const saltRounds = 10; // Adjust as needed for security
+    const saltRounds = config.get('SALT_WORK_FACTOR');
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
     // Create a new user with the hashed password
     const newUser = new User({

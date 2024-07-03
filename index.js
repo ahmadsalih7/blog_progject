@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const config = require('config');
 const register = require('./routes/register');
 const logger = require('./config/logger')
 
@@ -8,8 +9,10 @@ const app = express();
 app.use(express.json());
 
 // preparing listening ports
-app.listen(3000, () => {
-  logger.info("Server is on and listening to port 3000");
+const port = config.get('PORT');
+const message = 'Server is on and listening on port '+ port;
+app.listen(port, () => {
+  logger.info(message);
 });
 
 app.use('/api/register', register);
