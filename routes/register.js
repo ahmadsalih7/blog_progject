@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
         dblogger.info('A new user was registered')
     }
     catch(err){
-        res.status(404).send("User is already exists");
+        res.status(409).send("User is already exists");
         dblogger.error(err.message);
     }
 
